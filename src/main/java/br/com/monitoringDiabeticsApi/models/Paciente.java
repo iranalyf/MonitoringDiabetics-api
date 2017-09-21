@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,8 @@ public class Paciente {
 	private String senha;
 	private Boolean situacao = true;
 	private Endereco endereco;
+
+	private Doenca doenca;
 
 	@Id
 	public Long getCodigo() {
@@ -107,6 +110,16 @@ public class Paciente {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_doenca")
+	public Doenca getDoenca() {
+		return doenca;
+	}
+
+	public void setDoenca(Doenca doenca) {
+		this.doenca = doenca;
 	}
 
 	@Override

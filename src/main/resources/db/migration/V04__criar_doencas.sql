@@ -1,0 +1,7 @@
+CREATE TABLE doenca (
+	codigo BIGINT(20) AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(50) NOT NULL,
+	descricao VARCHAR(200)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO doenca(nome) VALUES ('Diabete Congenita');
