@@ -1,6 +1,0 @@
-CREATE TABLE horario_medicacao (
-	idHorario INTEGER AUTO_INCREMENT PRIMARY KEY,
-	horario DATETIME NOT NULL,
-	data DATE NOT NULL,
-	codigo_medicacao INTEGER
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -8,5 +8,7 @@ CREATE TABLE paciente (
 	cpf VARCHAR(15),
 	situacao BOOLEAN DEFAULT true,
 	codigo_endereco BIGINT(20) NOT NULL,
-	FOREIGN KEY (codigo_endereco) REFERENCES endereco(idEndereco)
+	codigo_doenca BIGINT(20) NOT NULL,
+	FOREIGN KEY (codigo_endereco) REFERENCES endereco(idEndereco),
+	FOREIGN KEY (codigo_doenca) REFERENCES doenca(codigo)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
