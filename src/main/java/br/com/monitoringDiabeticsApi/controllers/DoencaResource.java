@@ -1,4 +1,4 @@
-package br.com.monitoringDiabeticsApi.resources;
+package br.com.monitoringDiabeticsApi.controllers;
 
 import java.util.List;
 

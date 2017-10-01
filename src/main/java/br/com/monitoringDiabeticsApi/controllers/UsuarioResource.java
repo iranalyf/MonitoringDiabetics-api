@@ -1,4 +1,4 @@
-package br.com.monitoringDiabeticsApi.resources;
+package br.com.monitoringDiabeticsApi.controllers;
 
 import java.net.URI;
 import java.util.List;
@@ -20,49 +20,50 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.com.monitoringDiabeticsApi.models.Paciente;
-import br.com.monitoringDiabeticsApi.repository.PacienteRepository;
-import br.com.monitoringDiabeticsApi.services.PacienteService;
+import br.com.monitoringDiabeticsApi.models.Usuario;
+import br.com.monitoringDiabeticsApi.repository.UsuarioRepository;
+import br.com.monitoringDiabeticsApi.services.UsuarioService;
 
 @RestController
-@RequestMapping("/pacientes")
-public class PacienteResource {
+@RequestMapping("/usuarios")
+public class UsuarioResource {
 
 	@Autowired
-	private PacienteRepository pacienteRepository;
+	private UsuarioRepository usuarioRepository;
 
 	@Autowired
-	private PacienteService pacienteService;
+	private UsuarioService usuarioService;
 
 	@GetMapping
-	public List<Paciente> findAll() {
-		return this.pacienteRepository.findAll();
+	public List<Usuario> findAll() {
+		return this.usuarioRepository.findAll();
 	}
 
 	@GetMapping("/{codigo}")
 	public ResponseEntity<?> findOne(@PathVariable Long codigo) {
-		Paciente paciente = this.pacienteRepository.findOne(codigo);
-		return paciente != null ? ResponseEntity.ok(paciente) : ResponseEntity.notFound().build();
+		Usuario usuario = this.usuarioRepository.findOne(codigo);
+		return usuario != null ? ResponseEntity.ok(usuario) : ResponseEntity.notFound().build();
 	}
 
 	@PostMapping
-	public ResponseEntity<?> criar(@RequestBody @Valid Paciente paciente, HttpServletResponse res) {
-		paciente = this.pacienteRepository.save(paciente);
+	public ResponseEntity<?> criar(@RequestBody @Valid Usuario usuario, HttpServletResponse res) {
+		usuario = this.usuarioRepository.save(usuario);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-				.buildAndExpand(paciente.getCodigo()).toUri();
+				.buildAndExpand(usuario.getCodigo()).toUri();
 		res.setHeader("location", uri.toASCIIString());
-		return ResponseEntity.ok(paciente);
+		return ResponseEntity.ok(usuario);
 	}
 
 	@DeleteMapping("/{codigo}")
 	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long codigo) {
-		this.pacienteRepository.delete(codigo);
+	public void apagar(@PathVariable Long codigo) {
+		this.usuarioRepository.delete(codigo);
 	}
 
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Paciente> update(@Valid @RequestBody Paciente paciente, @PathVariable Long codigo) {
-		paciente = this.pacienteService.update(paciente, codigo);
-		return ResponseEntity.ok(paciente);
+	public ResponseEntity<Usuario> update(@Valid @RequestBody Usuario usuario, @PathVariable Long codigo) {
+		usuario = this.usuarioService.update(codigo, usuario);
+		return ResponseEntity.ok(usuario);
 	}
+
 }
