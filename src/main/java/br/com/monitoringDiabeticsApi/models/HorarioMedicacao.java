@@ -19,6 +19,7 @@ public class HorarioMedicacao {
 	private Integer idHorario;
 	private LocalDateTime horario;
 	private LocalDate data;
+	
 	private Medicacao medicacao;
 
 	@Id

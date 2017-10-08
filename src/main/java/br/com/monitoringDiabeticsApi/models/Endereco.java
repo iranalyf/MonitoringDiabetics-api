@@ -1,76 +1,31 @@
 package br.com.monitoringDiabeticsApi.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Embeddable;
 
-import br.com.monitoringDiabeticsApi.models.enums.TipoEndereco;
-
-@Entity
-@Table(name = "endereco")
+@Embeddable
 public class Endereco {
 
-	private Long idEndereco;
-	private TipoEndereco tipoEndereco;
-	private String descricao;
-	private Integer numero;
-	private String bairro;
+	private String logradouro;
+	private String numero;
 	private String complemento;
-	private Integer cep;
+	private String cep;
+	private String cidade;
+	private String estado;
 
-	private Cidade cidade;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long getIdEndereco() {
-		return idEndereco;
+	public String getLogradouro() {
+		return logradouro;
 	}
 
-	public void setIdEndereco(Long idEndereco) {
-		this.idEndereco = idEndereco;
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
 
-	@NotNull
-	@Column(name = "tipo_endereco")
-	public TipoEndereco getTipoEndereco() {
-		return tipoEndereco;
-	}
-
-	public void setTipoEndereco(TipoEndereco tipoEndereco) {
-		this.tipoEndereco = tipoEndereco;
-	}
-
-	@NotNull
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	@NotNull
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
-	}
-
-	@NotNull
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
 	}
 
 	public String getComplemento() {
@@ -81,49 +36,28 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	@NotNull
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
-	@NotNull
-	@OneToOne
-	@JoinColumn(name = "codigo_cidade")
-	public Cidade getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(Cidade cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((idEndereco == null) ? 0 : idEndereco.hashCode());
-		return result;
+	public String getEstado() {
+		return estado;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Endereco other = (Endereco) obj;
-		if (idEndereco == null) {
-			if (other.idEndereco != null)
-				return false;
-		} else if (!idEndereco.equals(other.idEndereco))
-			return false;
-		return true;
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 }

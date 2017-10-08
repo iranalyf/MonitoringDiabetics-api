@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -55,14 +54,22 @@ public class PacienteResource {
 	}
 
 	@DeleteMapping("/{codigo}")
-	@ResponseStatus(value = HttpStatus.NO_CONTENT)
-	public void delete(@PathVariable Long codigo) {
-		this.pacienteRepository.delete(codigo);
+	public ResponseEntity<?> delete(@PathVariable Long codigo) {
+		try {
+			this.pacienteRepository.delete(codigo);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
 	}
 
 	@PutMapping("/{codigo}")
 	public ResponseEntity<Paciente> update(@Valid @RequestBody Paciente paciente, @PathVariable Long codigo) {
-		paciente = this.pacienteService.update(paciente, codigo);
-		return ResponseEntity.ok(paciente);
+		try {
+			Paciente pacienteSalvo = this.pacienteService.update(paciente, codigo);
+			return ResponseEntity.ok(pacienteSalvo);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
 	}
 }

@@ -3,11 +3,13 @@ package br.com.monitoringDiabeticsApi.models;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +30,7 @@ public class Paciente {
 	private Doenca doenca;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -101,9 +104,7 @@ public class Paciente {
 		this.situacao = situacao;
 	}
 
-	@NotNull
-	@OneToOne
-	@JoinColumn(name = "codigo_endereco")
+	@Embedded
 	public Endereco getEndereco() {
 		return endereco;
 	}
