@@ -7,14 +7,14 @@ CREATE TABLE doenca (
 INSERT INTO doenca(nome) VALUES ('Diabete Congenita');
 
 CREATE TABLE medicacao (
-	idMedicacao INTEGER AUTO_INCREMENT PRIMARY KEY,
+	codigo INTEGER AUTO_INCREMENT PRIMARY KEY,
 	descricao VARCHAR(255) NOT NULL,
 	data_medicacao DATE NOT NULL,
 	observacao VARCHAR(255)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE dieta (
-	idDieta INTEGER AUTO_INCREMENT PRIMARY KEY,
+	codigo INTEGER AUTO_INCREMENT PRIMARY KEY,
 	data_inicio DATE NOT NULL,
 	data_fim DATE NOT NULL,
 	descricao VARCHAR(255) NOT NULL,
@@ -22,9 +22,9 @@ CREATE TABLE dieta (
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE horario_medicacao (
-	idHorario INTEGER AUTO_INCREMENT PRIMARY KEY,
+	codigo INTEGER AUTO_INCREMENT PRIMARY KEY,
 	horario DATETIME NOT NULL,
 	data DATE NOT NULL,
 	codigo_medicacao INTEGER,
-	FOREIGN KEY (codigo_medicacao) REFERENCES medicacao (idMedicacao)
+	FOREIGN KEY (codigo_medicacao) REFERENCES medicacao (codigo)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

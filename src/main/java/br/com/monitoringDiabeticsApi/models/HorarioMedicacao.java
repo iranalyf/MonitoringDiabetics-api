@@ -16,20 +16,20 @@ import javax.validation.constraints.NotNull;
 @Table(name = "horario_medicacao")
 public class HorarioMedicacao {
 
-	private Integer idHorario;
+	private Integer codigo;
 	private LocalDateTime horario;
 	private LocalDate data;
-	
+
 	private Medicacao medicacao;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getIdHorario() {
-		return idHorario;
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setIdHorario(Integer idHorario) {
-		this.idHorario = idHorario;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 	@ManyToOne
@@ -50,7 +50,7 @@ public class HorarioMedicacao {
 	public void setHorario(LocalDateTime horario) {
 		this.horario = horario;
 	}
-	
+
 	@NotNull
 	public LocalDate getData() {
 		return data;
@@ -64,7 +64,7 @@ public class HorarioMedicacao {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idHorario == null) ? 0 : idHorario.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 
@@ -77,10 +77,10 @@ public class HorarioMedicacao {
 		if (getClass() != obj.getClass())
 			return false;
 		HorarioMedicacao other = (HorarioMedicacao) obj;
-		if (idHorario == null) {
-			if (other.idHorario != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idHorario.equals(other.idHorario))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}

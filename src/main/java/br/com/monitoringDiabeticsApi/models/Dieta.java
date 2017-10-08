@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "dieta")
 public class Dieta {
 
-	private Integer IdDieta;
+	private Integer codigo;
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	private String descricao;
@@ -24,12 +24,12 @@ public class Dieta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Integer getIdDieta() {
-		return IdDieta;
+	public Integer getCodigo() {
+		return codigo;
 	}
 
-	public void setIdDieta(Integer idDieta) {
-		IdDieta = idDieta;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 	@NotNull
@@ -73,7 +73,7 @@ public class Dieta {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((IdDieta == null) ? 0 : IdDieta.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 
@@ -86,10 +86,10 @@ public class Dieta {
 		if (getClass() != obj.getClass())
 			return false;
 		Dieta other = (Dieta) obj;
-		if (IdDieta == null) {
-			if (other.IdDieta != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!IdDieta.equals(other.IdDieta))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}
