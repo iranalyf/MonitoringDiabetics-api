@@ -27,6 +27,7 @@ public class DietaService {
 	@Transactional
 	public Dieta save(Dieta dieta) {
 		dieta.setDataInicio(LocalDate.now());
-		return this.dietaRepository.saveAndFlush(dieta);
+		System.out.println(dieta.getDataInicio());
+		return this.dietaRepository.save(dieta);
 	}
 }

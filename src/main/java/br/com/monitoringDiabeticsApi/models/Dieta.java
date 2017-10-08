@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -32,7 +31,6 @@ public class Dieta {
 		this.codigo = codigo;
 	}
 
-	@NotNull
 	@Column(name = "data_inicio")
 	public LocalDate getDataInicio() {
 		return dataInicio;
@@ -42,7 +40,6 @@ public class Dieta {
 		this.dataInicio = dataInicio;
 	}
 
-	@NotNull
 	@Column(name = "data_fim")
 	public LocalDate getDataFim() {
 		return dataFim;
