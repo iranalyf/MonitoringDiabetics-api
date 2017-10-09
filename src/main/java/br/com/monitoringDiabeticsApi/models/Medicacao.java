@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +26,8 @@ public class Medicacao {
 	private String observacao;
 
 	private List<HorarioMedicacao> horariosMedicacoes = new ArrayList<>();
+
+	private Paciente paciente;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +48,7 @@ public class Medicacao {
 		this.descricao = descricao;
 	}
 
+	@Column(name = "data_medicacao")
 	public LocalDate getDataMedicacao() {
 		return dataMedicacao;
 	}
@@ -60,13 +65,23 @@ public class Medicacao {
 		this.observacao = observacao;
 	}
 
-	@OneToMany(mappedBy = "medicacao", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "medicacao")
 	public List<HorarioMedicacao> getHorariosMedicacoes() {
 		return horariosMedicacoes;
 	}
 
 	public void setHorariosMedicacoes(List<HorarioMedicacao> horariosMedicacoes) {
 		this.horariosMedicacoes = horariosMedicacoes;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_paciente", nullable = false)
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	@Override

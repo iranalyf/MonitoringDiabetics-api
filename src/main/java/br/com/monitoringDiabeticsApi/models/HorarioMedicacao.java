@@ -1,7 +1,7 @@
 package br.com.monitoringDiabeticsApi.models;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class HorarioMedicacao {
 
 	private Integer codigo;
-	private LocalDateTime horario;
+	private LocalTime horario;
 	private LocalDate data;
 
 	private Medicacao medicacao;
@@ -43,11 +43,11 @@ public class HorarioMedicacao {
 	}
 
 	@NotNull
-	public LocalDateTime getHorario() {
+	public LocalTime getHorario() {
 		return horario;
 	}
 
-	public void setHorario(LocalDateTime horario) {
+	public void setHorario(LocalTime horario) {
 		this.horario = horario;
 	}
 

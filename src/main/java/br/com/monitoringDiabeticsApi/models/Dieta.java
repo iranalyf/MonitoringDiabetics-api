@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -20,6 +22,8 @@ public class Dieta {
 	private LocalDate dataFim;
 	private String descricao;
 	private String observacao;
+
+	private Paciente paciente;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,6 +68,16 @@ public class Dieta {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "codigo_paciente", nullable = false)
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 	@Override

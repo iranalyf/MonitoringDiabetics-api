@@ -1,6 +1,8 @@
 package br.com.monitoringDiabeticsApi.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -22,12 +25,16 @@ public class Paciente {
 	private String sobrenome;
 	private String cpf;
 	private LocalDate dataNascimento;
+	private String telefone;
 	private String email;
 	private String senha;
 	private Boolean situacao = true;
 	private Endereco endereco;
 
 	private Doenca doenca;
+
+	private List<Dieta> dietas = new ArrayList<>();
+	private List<Medicacao> medicacoes = new ArrayList<>();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,6 +85,14 @@ public class Paciente {
 		this.dataNascimento = dataNascimento;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	@NotNull
 	public String getEmail() {
 		return email;
@@ -121,6 +136,24 @@ public class Paciente {
 
 	public void setDoenca(Doenca doenca) {
 		this.doenca = doenca;
+	}
+
+	@OneToMany(mappedBy = "paciente")
+	public List<Dieta> getDietas() {
+		return dietas;
+	}
+
+	public void setDietas(List<Dieta> dietas) {
+		this.dietas = dietas;
+	}
+
+	@OneToMany(mappedBy = "paciente")
+	public List<Medicacao> getMedicacoes() {
+		return medicacoes;
+	}
+
+	public void setMedicacoes(List<Medicacao> medicacoes) {
+		this.medicacoes = medicacoes;
 	}
 
 	@Override
