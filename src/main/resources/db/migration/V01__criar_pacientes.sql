@@ -24,7 +24,7 @@ CREATE TABLE paciente (
     complemento VARCHAR(20),
     cep VARCHAR(15),
     cidade VARCHAR(40),
-    estado VARCHAR(10),
+    estado VARCHAR(20),
     codigo_doenca BIGINT(20),
     FOREIGN KEY(codigo_doenca) REFERENCES doenca(codigo)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

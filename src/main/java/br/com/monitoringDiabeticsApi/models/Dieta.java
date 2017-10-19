@@ -13,6 +13,8 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "dieta")
 public class Dieta {
@@ -21,8 +23,17 @@ public class Dieta {
 	private LocalDate dataInicio;
 	private LocalDate dataFim;
 	private String descricao;
+	private String cafeManha;
+	private String lancheManha;
+	private String almoco;
+	private String sobremesaAlmoco;
+	private String lancheTarde;
+	private String janta;
+	private String lancheNoite;
+	private String qtdeAguaDiaria;
 	private String observacao;
 
+	@JsonIgnore
 	private Paciente paciente;
 
 	@Id
@@ -60,6 +71,86 @@ public class Dieta {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@NotEmpty
+	@Column(name = "cafe_manha")
+	public String getCafeManha() {
+		return cafeManha;
+	}
+
+	public void setCafeManha(String cafeManha) {
+		this.cafeManha = cafeManha;
+	}
+
+	@NotEmpty
+	@Column(name = "lanche_manha")
+	public String getLancheManha() {
+		return lancheManha;
+	}
+
+	public void setLancheManha(String lancheManha) {
+		this.lancheManha = lancheManha;
+	}
+
+	@NotEmpty
+	@Column(name = "almoco")
+	public String getAlmoco() {
+		return almoco;
+	}
+
+	public void setAlmoco(String almoco) {
+		this.almoco = almoco;
+	}
+
+	@NotEmpty
+	@Column(name = "sobremesa_almoco")
+	public String getSobremesaAlmoco() {
+		return sobremesaAlmoco;
+	}
+
+	public void setSobremesaAlmoco(String sobremesaAlmoco) {
+		this.sobremesaAlmoco = sobremesaAlmoco;
+	}
+
+	@NotEmpty
+	@Column(name = "lanche_tarde")
+	public String getLancheTarde() {
+		return lancheTarde;
+	}
+
+	public void setLancheTarde(String lancheTarde) {
+		this.lancheTarde = lancheTarde;
+	}
+
+	@NotEmpty
+	@Column(name = "janta")
+	public String getJanta() {
+		return janta;
+	}
+
+	public void setJanta(String janta) {
+		this.janta = janta;
+	}
+
+	@NotEmpty
+	@Column(name = "lanche_noite")
+	public String getLancheNoite() {
+		return lancheNoite;
+	}
+
+	public void setLancheNoite(String lancheNoite) {
+		this.lancheNoite = lancheNoite;
+	}
+
+	@NotEmpty
+	@Column(name = "qtde_agua_diaria")
+	public String getQtdeAguaDiaria() {
+		return qtdeAguaDiaria;
+	}
+
+	public void setQtdeAguaDiaria(String qtdeAguaDiaria) {
+		this.qtdeAguaDiaria = qtdeAguaDiaria;
 	}
 
 	public String getObservacao() {

@@ -1,7 +1,6 @@
 package br.com.monitoringDiabeticsApi.models;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "horario_medicacao")
 public class HorarioMedicacao {
 
 	private Integer codigo;
-	private LocalTime horario;
-	private LocalDate data;
+	private String horario;
+	private LocalDate dataFim;
 
 	private Medicacao medicacao;
 
@@ -43,21 +44,22 @@ public class HorarioMedicacao {
 	}
 
 	@NotNull
-	public LocalTime getHorario() {
+	@JsonFormat(pattern = "HH:mm")
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(LocalTime horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 
 	@NotNull
-	public LocalDate getData() {
-		return data;
+	public LocalDate getDataFim() {
+		return dataFim;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setDataFim(LocalDate dataFim) {
+		this.dataFim = dataFim;
 	}
 
 	@Override

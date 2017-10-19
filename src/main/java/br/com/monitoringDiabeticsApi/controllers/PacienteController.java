@@ -19,13 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.monitoringDiabeticsApi.models.Dieta;
+import br.com.monitoringDiabeticsApi.models.Medicacao;
 import br.com.monitoringDiabeticsApi.models.Paciente;
 import br.com.monitoringDiabeticsApi.repository.PacienteRepository;
 import br.com.monitoringDiabeticsApi.services.PacienteService;
 
 @RestController
 @RequestMapping("/pacientes")
-public class PacienteResource {
+public class PacienteController {
 
 	@Autowired
 	private PacienteRepository pacienteRepository;
@@ -41,7 +43,22 @@ public class PacienteResource {
 	@GetMapping("/{codigo}")
 	public ResponseEntity<?> findOne(@PathVariable Long codigo) {
 		Paciente paciente = this.pacienteRepository.findOne(codigo);
-		return paciente != null ? ResponseEntity.ok(paciente) : ResponseEntity.notFound().build();
+		return paciente != null 
+				? ResponseEntity.ok(paciente) 
+				: ResponseEntity.notFound().build();
+	}
+
+	@GetMapping("/{codigo}/allMedicacoes")
+	public ResponseEntity<?> findAllMedicacoesByIdPaciente(@PathVariable Long codigo) {
+		List<Medicacao> medicacoesByPacient = 
+				this.pacienteRepository.findAllMedicacoesByCodigoPacient(codigo);
+		return ResponseEntity.ok(medicacoesByPacient);
+	}
+
+	@GetMapping("/{codigo}/dietas")
+	public ResponseEntity<?> findDietasByIdPaciente(@PathVariable Long codigo) {
+		List<Dieta> dietasByPaciente = this.pacienteRepository.findDietasByCodigoPaciente(codigo);
+		return !dietasByPaciente.isEmpty() ? ResponseEntity.ok(dietasByPaciente) : ResponseEntity.noContent().build();
 	}
 
 	@PostMapping

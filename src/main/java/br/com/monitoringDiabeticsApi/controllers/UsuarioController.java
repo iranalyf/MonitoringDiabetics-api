@@ -26,7 +26,7 @@ import br.com.monitoringDiabeticsApi.services.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioResource {
+public class UsuarioController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;

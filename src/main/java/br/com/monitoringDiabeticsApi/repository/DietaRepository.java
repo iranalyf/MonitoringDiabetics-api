@@ -6,4 +6,5 @@ import br.com.monitoringDiabeticsApi.models.Dieta;
 
 public interface DietaRepository extends JpaRepository<Dieta, Integer> {
 
+	
 }

@@ -18,7 +18,7 @@ import br.com.monitoringDiabeticsApi.services.DietaService;
 
 @RestController
 @RequestMapping("/dietas")
-public class DietaResource {
+public class DietaController {
 
 	@Autowired
 	private DietaService dietaService;

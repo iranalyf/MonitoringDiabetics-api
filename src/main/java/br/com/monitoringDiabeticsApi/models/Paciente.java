@@ -34,6 +34,7 @@ public class Paciente {
 	private Doenca doenca;
 
 	private List<Dieta> dietas = new ArrayList<>();
+	
 	private List<Medicacao> medicacoes = new ArrayList<>();
 
 	@Id

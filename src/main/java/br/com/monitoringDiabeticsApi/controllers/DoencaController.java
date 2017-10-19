@@ -18,7 +18,7 @@ import br.com.monitoringDiabeticsApi.repository.DoencaRespository;
 
 @RestController
 @RequestMapping("/doencas")
-public class DoencaResource {
+public class DoencaController {
 
 	@Autowired
 	private DoencaRespository doencaRespository;
