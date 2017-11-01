@@ -9,12 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.monitoringDiabeticsApi.models.Dieta;
 import br.com.monitoringDiabeticsApi.repository.DietaRepository;
+import br.com.monitoringDiabeticsApi.repository.PacienteRepository;
 
 @Service
 public class DietaService {
 
 	@Autowired
 	private DietaRepository dietaRepository;
+
+	@Autowired
+	private PacienteRepository pacienteRepository;
 
 	public List<Dieta> findAll() {
 		return this.dietaRepository.findAll();
@@ -27,7 +31,9 @@ public class DietaService {
 	@Transactional
 	public Dieta save(Dieta dieta) {
 		dieta.setDataInicio(LocalDate.now());
-		System.out.println(dieta.getDataInicio());
-		return this.dietaRepository.save(dieta);
+		Dieta dietaSalva = this.dietaRepository.save(dieta);
+		System.out.println(dietaSalva.getPaciente().getPrimeiroNome());
+		this.pacienteRepository.updateDataUltimoRegistro(dietaSalva.getPaciente().getCodigo());
+		return dietaSalva;
 	}
 }

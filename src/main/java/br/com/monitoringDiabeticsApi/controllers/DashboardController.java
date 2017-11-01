@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.monitoringDiabeticsApi.repository.PacienteRepository;
 import br.com.monitoringDiabeticsApi.repository.UsuarioRepository;
 
-@RequestMapping("/dashboard")
 @RestController
+@RequestMapping("/dashboard")
 public class DashboardController {
 
 	@Autowired
 	private PacienteRepository pacienteRepository;
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 

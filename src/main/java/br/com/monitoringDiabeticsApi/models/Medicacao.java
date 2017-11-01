@@ -16,8 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "medicacao")
 public class Medicacao {
@@ -76,7 +74,6 @@ public class Medicacao {
 		this.horariosMedicacoes = horariosMedicacoes;
 	}
 
-	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "codigo_paciente", nullable = false)
 	public Paciente getPaciente() {

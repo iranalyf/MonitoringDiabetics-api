@@ -19,6 +19,8 @@ CREATE TABLE paciente (
 	senha VARCHAR(200) NOT NULL,
 	telefone VARCHAR(20),
 	situacao BOOLEAN DEFAULT true,
+	ultimo_registro DATE,
+	data_cadastro DATE,
 	logradouro VARCHAR(50),
     numero VARCHAR(15),
     complemento VARCHAR(20),

@@ -9,12 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.monitoringDiabeticsApi.models.Medicacao;
 import br.com.monitoringDiabeticsApi.repository.MedicacaoRepository;
+import br.com.monitoringDiabeticsApi.repository.PacienteRepository;
 
 @Service
 public class MedicacaoService {
 
 	@Autowired
 	private MedicacaoRepository medicacaoRepository;
+	
+	@Autowired
+	private PacienteRepository pacienteRepository;
 
 	public List<Medicacao> findAll() {
 		return this.medicacaoRepository.findAll();
@@ -27,6 +31,8 @@ public class MedicacaoService {
 	@Transactional
 	public Medicacao save(Medicacao medicacao) {
 		medicacao.setDataMedicacao(LocalDate.now());
-		return this.medicacaoRepository.save(medicacao);
+		 Medicacao medicacaoSalva = this.medicacaoRepository.save(medicacao);
+		 this.pacienteRepository.updateDataUltimoRegistro(medicacao.getPaciente().getCodigo());
+		 return medicacaoSalva;
 	}
 }

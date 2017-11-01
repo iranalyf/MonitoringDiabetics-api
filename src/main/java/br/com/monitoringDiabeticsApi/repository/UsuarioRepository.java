@@ -11,6 +11,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	public Optional<Usuario> findByEmail(String email);
 	
-	@Query("select sum(u.codigo) from Usuario u")
+	@Query("select count(u.codigo) from Usuario u")
 	public Long countUsuarios();
 }

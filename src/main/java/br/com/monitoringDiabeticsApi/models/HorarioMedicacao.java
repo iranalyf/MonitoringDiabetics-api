@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "horario_medicacao")
@@ -35,6 +36,7 @@ public class HorarioMedicacao {
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_medicacao")
+	@JsonIgnore
 	public Medicacao getMedicacao() {
 		return medicacao;
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "paciente")
@@ -30,11 +33,14 @@ public class Paciente {
 	private String senha;
 	private Boolean situacao = true;
 	private Endereco endereco;
+	
+	private LocalDate dataCadastro;
+	private LocalDate ultimoRegistro;
 
 	private Doenca doenca;
 
 	private List<Dieta> dietas = new ArrayList<>();
-	
+
 	private List<Medicacao> medicacoes = new ArrayList<>();
 
 	@Id
@@ -120,6 +126,24 @@ public class Paciente {
 		this.situacao = situacao;
 	}
 
+	@Column(name = "ultimo_registro")
+	public LocalDate getUltimoRegistro() {
+		return ultimoRegistro;
+	}
+
+	public void setUltimoRegistro(LocalDate ultimoRegistro) {
+		this.ultimoRegistro = ultimoRegistro;
+	}
+	
+	@Column(name = "data_cadastro")
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+	
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	@Embedded
 	public Endereco getEndereco() {
 		return endereco;
@@ -140,6 +164,7 @@ public class Paciente {
 	}
 
 	@OneToMany(mappedBy = "paciente")
+	@JsonIgnore
 	public List<Dieta> getDietas() {
 		return dietas;
 	}
@@ -148,7 +173,8 @@ public class Paciente {
 		this.dietas = dietas;
 	}
 
-	@OneToMany(mappedBy = "paciente")
+	@OneToMany(mappedBy = "paciente", fetch = FetchType.EAGER)
+	@JsonIgnore
 	public List<Medicacao> getMedicacoes() {
 		return medicacoes;
 	}

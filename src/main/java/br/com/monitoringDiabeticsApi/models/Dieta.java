@@ -13,8 +13,6 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "dieta")
 public class Dieta {
@@ -33,7 +31,6 @@ public class Dieta {
 	private String qtdeAguaDiaria;
 	private String observacao;
 
-	@JsonIgnore
 	private Paciente paciente;
 
 	@Id
