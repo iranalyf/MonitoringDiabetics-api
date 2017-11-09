@@ -36,7 +36,6 @@ public class PacienteService {
 	@Transactional
 	public Paciente save(Paciente paciente) {
 		paciente.setDataCadastro(LocalDate.now());
-		paciente.setUltimoRegistro(LocalDate.now());
 		return this.pacienteRepository.save(paciente);
 	}
 

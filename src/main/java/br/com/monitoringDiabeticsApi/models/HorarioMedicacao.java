@@ -2,6 +2,7 @@ package br.com.monitoringDiabeticsApi.models;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,9 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "horario_medicacao")
@@ -36,7 +34,6 @@ public class HorarioMedicacao {
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_medicacao")
-	@JsonIgnore
 	public Medicacao getMedicacao() {
 		return medicacao;
 	}
@@ -46,7 +43,6 @@ public class HorarioMedicacao {
 	}
 
 	@NotNull
-	@JsonFormat(pattern = "HH:mm")
 	public String getHorario() {
 		return horario;
 	}
@@ -56,6 +52,7 @@ public class HorarioMedicacao {
 	}
 
 	@NotNull
+	@Column(name = "data_fim")
 	public LocalDate getDataFim() {
 		return dataFim;
 	}

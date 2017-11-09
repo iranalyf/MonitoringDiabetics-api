@@ -26,15 +26,15 @@ public class HorarioMedicacaoService {
 
 	@Transactional
 	public HorarioMedicacao save(HorarioMedicacao horarioMedicacao) {
-		// horarioMedicacao.setData(LocalDate.now());
 		return this.horarioMedicacaoRepository.save(horarioMedicacao);
 	}
 
 	@Transactional
 	public void setFimMedicacao(Integer idHorarioMedicacao) {
-		HorarioMedicacao horarioMedicacao = this.horarioMedicacaoRepository.findOne(idHorarioMedicacao);
-		horarioMedicacao.setDataFim(LocalDate.now());
-		this.horarioMedicacaoRepository.saveAndFlush(horarioMedicacao);
+		HorarioMedicacao horarioMedicacaoSalvo = this.horarioMedicacaoRepository
+				.findOne(idHorarioMedicacao);
+		horarioMedicacaoSalvo.setDataFim(LocalDate.now());
+		this.horarioMedicacaoRepository.save(horarioMedicacaoSalvo);
 
 	}
 }

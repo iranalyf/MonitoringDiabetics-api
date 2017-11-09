@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,6 +17,10 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 @Table(name = "medicacao")
 public class Medicacao {
@@ -25,6 +30,7 @@ public class Medicacao {
 	private LocalDate dataMedicacao;
 	private String observacao;
 
+	@JsonIgnore
 	private List<HorarioMedicacao> horariosMedicacoes = new ArrayList<>();
 
 	private Paciente paciente;
@@ -57,6 +63,7 @@ public class Medicacao {
 		this.dataMedicacao = dataMedicacao;
 	}
 
+	@JsonInclude(value=Include.NON_NULL)
 	public String getObservacao() {
 		return observacao;
 	}
@@ -65,7 +72,7 @@ public class Medicacao {
 		this.observacao = observacao;
 	}
 
-	@OneToMany(mappedBy = "medicacao")
+	@OneToMany(mappedBy = "medicacao", fetch=FetchType.EAGER)
 	public List<HorarioMedicacao> getHorariosMedicacoes() {
 		return horariosMedicacoes;
 	}

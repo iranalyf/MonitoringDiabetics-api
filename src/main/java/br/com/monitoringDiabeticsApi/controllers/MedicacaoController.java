@@ -24,14 +24,16 @@ public class MedicacaoController {
 	private MedicacaoService medicacaoService;
 
 	@GetMapping
-	public List<Medicacao> findAll() {
-		return this.medicacaoService.findAll();
+	public ResponseEntity<List<Medicacao>> findAll() {
+		return ResponseEntity.status(200).body(this.medicacaoService.findAll());
 	}
 
 	@PostMapping("/{id}")
 	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		Medicacao medicacao = this.medicacaoService.findById(id);
-		return medicacao != null ? ResponseEntity.ok(medicacao) : ResponseEntity.notFound().build();
+		return medicacao != null 
+				? ResponseEntity.ok(medicacao) 
+				: ResponseEntity.notFound().build();
 	}
 
 	@PostMapping

@@ -1,29 +1,32 @@
 package br.com.monitoringDiabeticsApi.models;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import br.com.monitoringDiabeticsApi.models.enums.Situacao;
 
 @Entity
 @Table(name = "paciente")
 public class Paciente {
 
 	private Long codigo;
+
 	private String primeiroNome;
 	private String sobrenome;
 	private String cpf;
@@ -31,18 +34,14 @@ public class Paciente {
 	private String telefone;
 	private String email;
 	private String senha;
-	private Boolean situacao = true;
 	private Endereco endereco;
-	
+
 	private LocalDate dataCadastro;
 	private LocalDate ultimoRegistro;
 
 	private Doenca doenca;
 
-	private List<Dieta> dietas = new ArrayList<>();
-
-	private List<Medicacao> medicacoes = new ArrayList<>();
-
+	private Situacao situacao = Situacao.ATIVO;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getCodigo() {
@@ -118,14 +117,16 @@ public class Paciente {
 		this.senha = senha;
 	}
 
-	public Boolean getSituacao() {
+	@Enumerated(EnumType.STRING)
+	public Situacao getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(Boolean situacao) {
+	public void setSituacao(Situacao situacao) {
 		this.situacao = situacao;
 	}
 
+	@JsonInclude(value = Include.NON_NULL)
 	@Column(name = "ultimo_registro")
 	public LocalDate getUltimoRegistro() {
 		return ultimoRegistro;
@@ -134,12 +135,13 @@ public class Paciente {
 	public void setUltimoRegistro(LocalDate ultimoRegistro) {
 		this.ultimoRegistro = ultimoRegistro;
 	}
-	
+
+	@JsonInclude(value = Include.NON_NULL)
 	@Column(name = "data_cadastro")
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
-	
+
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
@@ -161,26 +163,6 @@ public class Paciente {
 
 	public void setDoenca(Doenca doenca) {
 		this.doenca = doenca;
-	}
-
-	@OneToMany(mappedBy = "paciente")
-	@JsonIgnore
-	public List<Dieta> getDietas() {
-		return dietas;
-	}
-
-	public void setDietas(List<Dieta> dietas) {
-		this.dietas = dietas;
-	}
-
-	@OneToMany(mappedBy = "paciente", fetch = FetchType.EAGER)
-	@JsonIgnore
-	public List<Medicacao> getMedicacoes() {
-		return medicacoes;
-	}
-
-	public void setMedicacoes(List<Medicacao> medicacoes) {
-		this.medicacoes = medicacoes;
 	}
 
 	@Override
