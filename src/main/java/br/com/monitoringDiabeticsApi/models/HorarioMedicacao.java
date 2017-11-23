@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "horario_medicacao")
 public class HorarioMedicacao {
@@ -32,6 +34,7 @@ public class HorarioMedicacao {
 		this.codigo = codigo;
 	}
 
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "codigo_medicacao")
 	public Medicacao getMedicacao() {

@@ -24,6 +24,8 @@ import br.com.monitoringDiabeticsApi.dto.PacienteMes;
 import br.com.monitoringDiabeticsApi.models.Dieta;
 import br.com.monitoringDiabeticsApi.models.Medicacao;
 import br.com.monitoringDiabeticsApi.models.Paciente;
+import br.com.monitoringDiabeticsApi.repository.DietaRepository;
+import br.com.monitoringDiabeticsApi.repository.MedicacaoRepository;
 import br.com.monitoringDiabeticsApi.repository.PacienteRepository;
 import br.com.monitoringDiabeticsApi.services.PacienteService;
 
@@ -36,6 +38,12 @@ public class PacienteController {
 
 	@Autowired
 	private PacienteService pacienteService;
+	
+	@Autowired
+	private DietaRepository dietaRepository;
+	
+	@Autowired
+	private MedicacaoRepository medicacaoRepository;
 
 	@GetMapping
 	public ResponseEntity<List<Paciente>> findAll() {
@@ -67,12 +75,20 @@ public class PacienteController {
 		return ResponseEntity.ok(medicacoesByPacient);
 	}
 
-	@GetMapping("/{codigo}/dietas")
-	public ResponseEntity<?> findDietasByIdPaciente(@PathVariable Long codigo) {
-		List<Dieta> dietasByPaciente = this.pacienteRepository.findDietasByCodigoPaciente(codigo);
-		return !dietasByPaciente.isEmpty() 
-				? ResponseEntity.ok(dietasByPaciente) 
-				: ResponseEntity.noContent().build();
+	@GetMapping("/{id}/dietas")
+	public ResponseEntity<List<Dieta>> findAllDietasByPaciente(@PathVariable Long id){
+		 List<Dieta> dietas = dietaRepository.findDietasByCodigoPaciente(id);
+		 return dietas.isEmpty() 
+				? ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+				: ResponseEntity.ok(dietas);
+	}
+	
+	@GetMapping("/{id}/medicacoes")
+	public ResponseEntity<List<Medicacao>> findAllMedicacoesByPaciente(@PathVariable Long id){
+		List<Medicacao> medicacoes = this.medicacaoRepository.findMedicacoesByCodigoPaciente(id);
+		return medicacoes.isEmpty()
+				? ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+				: ResponseEntity.ok(medicacoes);
 	}
 
 	@PostMapping

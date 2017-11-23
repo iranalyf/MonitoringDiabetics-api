@@ -35,7 +35,7 @@ public class MedicacaoController {
 				? ResponseEntity.ok(medicacao) 
 				: ResponseEntity.notFound().build();
 	}
-
+	
 	@PostMapping
 	public ResponseEntity<Medicacao> save(@Valid @RequestBody Medicacao medicacao) {
 		medicacao = this.medicacaoService.save(medicacao);

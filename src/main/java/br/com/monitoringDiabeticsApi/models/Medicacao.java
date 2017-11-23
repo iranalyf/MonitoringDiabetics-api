@@ -17,9 +17,9 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "medicacao")
@@ -30,7 +30,7 @@ public class Medicacao {
 	private LocalDate dataMedicacao;
 	private String observacao;
 
-	@JsonIgnore
+	
 	private List<HorarioMedicacao> horariosMedicacoes = new ArrayList<>();
 
 	private Paciente paciente;
@@ -72,6 +72,7 @@ public class Medicacao {
 		this.observacao = observacao;
 	}
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "medicacao", fetch=FetchType.EAGER)
 	public List<HorarioMedicacao> getHorariosMedicacoes() {
 		return horariosMedicacoes;
